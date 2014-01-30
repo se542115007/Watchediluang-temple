@@ -1,0 +1,22 @@
+<h2>Feedback Form</h2>
+<form method="post" action="sendmail.php">
+From: <input type="text" name="from"><br>
+Message: <textarea rows="10" cols="40" name="message"></textarea><br>
+<input type="submit" value="Submit">
+</form>
+<?php
+//if "from" is filled out, then send email
+if (isset($_POST['from']))
+  {
+  $from = $_POST['from']; // sender
+  $message = $_POST['message'];
+  // message lines should not exceed 70 characters (PHP rule), so wrap it
+  $message = wordwrap($message, 70);
+  mail("webmaster@example.com", "Feedback", $message, "From: $from");
+  echo "Thank you for sending us feedback";
+  }
+else
+  {
+  echo "Please enter your email address to send feedback";
+  }
+?>
